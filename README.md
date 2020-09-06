@@ -1,5 +1,7 @@
 # TsekProfile
 
+[![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell) [![License][license-badge]](LICENSE)
+
 My heavily customized Powershell profile.
 
 ## Instructions
