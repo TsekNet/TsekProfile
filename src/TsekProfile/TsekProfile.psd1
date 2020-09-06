@@ -72,29 +72,28 @@
     'PSWriteHTML')
 
   # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-  FunctionsToExport = @('Set-Path',
-    'Import-MyModule',
-    'Get-Elevation',
-    'Set-WindowTitle',
-    'Import-GitRepo',
-    'Install-Fonts',
-    'Copy-LastCommand',
+  FunctionsToExport = @('Copy-LastCommand',
+    'Install-Profile',
     'Edit-Profile',
-    'Open-HistoryFile',
+    'Get-Elevation',
+    'Get-ExportedFunction',
     'Get-FileHash256',
-    'Get-ExportedFunctions')
+    'Install-Font',
+    'Open-HistoryFile',
+    'Set-Path',
+    'Set-WindowTitle')
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-  CmdletsToExport   = @('Set-Path', 'Import-MyModule',
-    'Get-Elevation',
-    'Set-WindowTitle',
-    'Import-GitRepo',
-    'Install-Fonts',
-    'Copy-LastCommand',
+  CmdletsToExport   = @('Copy-LastCommand',
+    'Install-Profile',
     'Edit-Profile',
-    'Open-HistoryFile',
+    'Get-Elevation',
+    'Get-ExportedFunction',
     'Get-FileHash256',
-    'Get-ExportedFunctions')
+    'Install-Font',
+    'Open-HistoryFile',
+    'Set-Path',
+    'Set-WindowTitle')
 
   # Variables to export from this module
   VariablesToExport = '*'

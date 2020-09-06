@@ -11,6 +11,7 @@
   #>
   try {
     $functions = (Get-Command -Module 'TsekProfile' -CommandType Function).Name -join ', '
+    # TODO: Add color to function output.
     Write-Output "Profile helper functions: $functions"
   }
   catch {
