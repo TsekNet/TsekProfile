@@ -4,9 +4,11 @@
 Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/TsekNet/TsekProfile/blob/master/LICENSE)
-[![ActionsTest-Windows-Build](https://github.com/TsekNet/TsekProfile/workflows/ActionsTest-Windows-Build/badge.svg?branch=master)](https://github.com/TsekNet/TsekProfile/actions?query=workflow%3AActionsTest-Windows-Build)
+[![Windows-Build](https://github.com/TsekNet/TsekProfile/workflows/Windows-Build/badge.svg?branch=master)](https://github.com/TsekNet/TsekProfile/actions?query=workflow%3AActionsTest-Windows-Build)
 
-![TsekProfile](media/logo.png)
+<p align="center">
+    <img src="./media/logo.png" alt="TsekProfile Logo" >
+</p>
 
 My heavily customized Powershell profile.
 
