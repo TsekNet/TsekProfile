@@ -1,16 +1,16 @@
 ﻿
 <#
-  .SYNOPSIS
-    The TsekNet PowerShell Profile.
-  .DESCRIPTION
-    Executes multiple functions defined in the TsekProfile module to install and
-    configure the profile on the local system.
+.SYNOPSIS
+  The TsekNet PowerShell Profile.
+.DESCRIPTION
+  Executes multiple functions defined in the TsekProfile module to install and
+  configure the profile on the local system.
 
-    Optionally, when this profile is being installed, you can hold SHIFT to
-    display verbose messages.
-  .EXAMPLE
-    profile.ps1 -Verbose
-  #>
+  Optionally, when this profile is being installed, you can hold SHIFT to
+  display verbose messages.
+.EXAMPLE
+  profile.ps1 -Verbose
+#>
 [CmdletBinding()]
 param ()
 

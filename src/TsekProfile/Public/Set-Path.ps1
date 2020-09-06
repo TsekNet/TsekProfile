@@ -1,5 +1,4 @@
-﻿# Helper function to change directory to my development workspace
-function Set-Path {
+﻿function Set-Path {
   <#
   .SYNOPSIS
     Change the current directory.

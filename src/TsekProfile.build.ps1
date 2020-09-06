@@ -271,7 +271,7 @@ Add-BuildTask CreateHelpStart {
   Write-Build Gray '           ...platyPS imported successfully.'
 
   Write-Build Gray "           Importing $ModuleName v$ModuleVersion ..."
-  Import-Module -Name "$ModuleSourcePath\$ModuleName.psd1" -Force -ErrorAction Stop
+  Import-Module -Name "$ModuleSourcePath\$ModuleName.psd1" -Global -Force -PassThru -ErrorAction Stop
   Write-Build Gray "           ...$ModuleName imported successfully."
 }#CreateHelpStart
 
@@ -379,7 +379,7 @@ Add-BuildTask Build {
   #$private = "$script:ModuleSourcePath\Private"
   $scriptContent = [System.Text.StringBuilder]::new()
   #$powerShellScripts = Get-ChildItem -Path $script:ModuleSourcePath -Filter '*.ps1' -Recurse
-  $powerShellScripts = Get-ChildItem -Path $script:ArtifactsPath -Recurse | Where-Object { $_.Name -match '^*.ps1$' }
+  $powerShellScripts = Get-ChildItem -Path $script:ArtifactsPath -Recurse | Where-Object { ($_.Name -notlike 'profile.ps1') -and ($_.Name -match '^*.ps1$') }
   foreach ($script in $powerShellScripts) {
     $null = $scriptContent.Append((Get-Content -Path $script.FullName -Raw))
     $null = $scriptContent.AppendLine('')
