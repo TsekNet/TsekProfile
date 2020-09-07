@@ -32,7 +32,7 @@ $null = $modulesToInstall.Add(([PSCustomObject]@{
 
 # https://github.com/dahlbyk/posh-git
 $null = $modulesToInstall.Add(([PSCustomObject]@{
-      ModuleName    = 'posh-git'
+      ModuleName = 'posh-git'
     }))
 
 # https://github.com/JanDeDobbeleer/oh-my-posh
@@ -58,6 +58,7 @@ foreach ($module in $modulesToInstall) {
     Repository      = 'PSGallery'
     Force           = $true
     ErrorAction     = 'Stop'
+    AllowClobber    = $true
   }
   try {
     Install-Module @installSplat
@@ -67,6 +68,6 @@ foreach ($module in $modulesToInstall) {
   catch {
     $message = 'Failed to install {0}' -f $module.ModuleName
     "  - $message"
-    throw $_
+    throw
   }
 }
