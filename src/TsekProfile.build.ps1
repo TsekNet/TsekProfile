@@ -1,3 +1,5 @@
+#Requires -Modules posh-git, oh-my-posh, Get-ChildItemColor, PSWriteHTML
+
 <#
 .SYNOPSIS
     An Invoke-Build Build file.
@@ -267,8 +269,12 @@ Add-BuildTask CreateHelpStart {
   Write-Build White '      Performing all help related actions.'
 
   Write-Build Gray '           Importing platyPS v0.12.0 ...'
-  Import-Module platyPS -RequiredVersion 0.12.0 -ErrorAction Stop
+  Import-Module platyPS -RequiredVersion 0.12.0 -Global -Force -PassThru -ErrorAction Stop
   Write-Build Gray '           ...platyPS imported successfully.'
+
+  Write-Build Gray "           Importing $ModuleName v$ModuleVersion ..."
+  Import-Module -Name "$ModuleSourcePath\$ModuleName.psd1" -Global -Force -PassThru -ErrorAction Stop
+  Write-Build Gray "           ...$ModuleName imported successfully."
 }#CreateHelpStart
 
 # Synopsis: Build markdown help files for module and fail if help information is missing
