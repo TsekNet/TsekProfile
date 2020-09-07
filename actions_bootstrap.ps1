@@ -30,6 +30,26 @@ $null = $modulesToInstall.Add(([PSCustomObject]@{
       ModuleVersion = '0.12.0'
     }))
 
+# https://github.com/dahlbyk/posh-git
+$null = $modulesToInstall.Add(([PSCustomObject]@{
+      ModuleName    = 'posh-git'
+    }))
+
+# https://github.com/JanDeDobbeleer/oh-my-posh
+$null = $modulesToInstall.Add(([PSCustomObject]@{
+      ModuleName = 'oh-my-posh'
+    }))
+
+# https://github.com/joonro/Get-ChildItemColor
+$null = $modulesToInstall.Add(([PSCustomObject]@{
+      ModuleName = 'Get-ChildItemColor'
+    }))
+
+# https://github.com/EvotecIT/PSWriteHTML
+$null = $modulesToInstall.Add(([PSCustomObject]@{
+      ModuleName = 'PSWriteHTML'
+    }))
+
 'Installing PowerShell Modules'
 foreach ($module in $modulesToInstall) {
   $installSplat = @{

@@ -1,5 +1,3 @@
-#Requires -Modules posh-git, oh-my-posh, Get-ChildItemColor, PSWriteHTML
-
 <#
 .SYNOPSIS
     An Invoke-Build Build file.
