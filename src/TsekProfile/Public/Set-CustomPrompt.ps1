@@ -1,0 +1,119 @@
+﻿function Set-CustomPrompt {
+  <#
+  .SYNOPSIS
+    Custom oh-my-posh theme built by @TsekNet.
+  .DESCRIPTION
+    This module is a custom theme lerages the oh-my-posh Powerline module.
+
+    You should be able to just run Set-Theme TsekNet if you've already got
+    oh-my-posh installed. if you're missing oh-my-posh you'll see errors in the
+    console.
+  .PARAMETER Force
+    Controls whether or not the user is prompted to change their prompt.
+  .EXAMPLE
+    Set-CustomPrompt TsekNet
+
+    Leverages the oh-my-posh Set-Theme function to define select this theme.
+  #>
+  [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+  param (
+    [switch]$Force
+  )
+
+  begin {
+    $black = [System.ConsoleColor]::Black
+    $blue = [System.ConsoleColor]::Blue
+    $cyan = [System.ConsoleColor]::Cyan
+    $dark_cyan = [System.ConsoleColor]::DarkCyan
+    $gray = [System.ConsoleColor]::Gray
+    $magenta = [System.ConsoleColor]::Magenta
+    $red = [System.ConsoleColor]::Red
+    $white = [System.ConsoleColor]::White
+    $yellow = [System.ConsoleColor]::Yellow
+
+    $forward_arrow = [char]::ConvertFromUtf32(0xE0B1)
+    $backward_symbol = [char]::ConvertFromUtf32(0xE0B2)
+    $forward_symbol = [char]::ConvertFromUtf32(0xE0B0)
+    $heart_symbol = [char]::ConvertFromUtf32(0x2764)
+    $warning_symbol = [char]::ConvertFromUtf32(0x203C)
+    $start_symbol = ''
+  }
+
+  process {
+    if ($Force -or $PSCmdlet.ShouldProcess('PowerShell prompt', 'overwrite')) {
+      $prompt = Write-Prompt -Object $start_symbol -ForegroundColor $white -BackgroundColor $black
+
+      # Check the last command state and indicate if failed
+      if ($LastCommandFailed) {
+        $prompt += Write-Prompt -Object $warning_symbol -ForegroundColor $white -BackgroundColor $red
+        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $red -BackgroundColor $cyan
+      }
+
+      # Add invocation number
+      $prompt += Write-Prompt -Object " $($MyInvocation.HistoryId) " -ForegroundColor $dark_gray -BackgroundColor $cyan
+      $prompt += Write-Prompt -Object $($forward_symbol) -ForegroundColor $cyan -BackgroundColor $gray
+
+      $full_path = $pwd.Path.Replace("$($pwd.Drive.Name)\", '').Replace('\', ' ' + $forward_arrow + ' ')
+
+      if (Test-VirtualEnv) {
+        $prompt += Write-Prompt -Object "$($forward_symbol) " -ForegroundColor $black -BackgroundColor $red
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -ForegroundColor $white -BackgroundColor $red
+        $prompt += Write-Prompt -Object "$($forward_symbol) " -ForegroundColor $red -BackgroundColor $dark_cyan
+      }
+      else {
+        $prompt += Write-Prompt -Object " $($pwd.Drive.Name) " -ForegroundColor $dark_cyan -BackgroundColor $gray
+        $prompt += Write-Prompt -Object $($forward_symbol) -ForegroundColor $gray -BackgroundColor $dark_cyan
+      }
+
+      # Writes the drive portion
+      # Reduce the path displayed if it is long
+      if (($full_path.Split($forward_arrow).count -gt 2)) {
+        $One = $full_path.split($forward_arrow)[-1]
+        $Two = $full_path.split($forward_arrow)[-2]
+
+        if ($One.Length -gt 10) { $One = "$($One[0..7] -join '')~" }
+        if ($Two.Length -gt 10) { $Two = "$($Two[0..7] -join '')~" }
+
+        # Don't include drive letter
+        $partial_path = ' .. ', $Two, $One -join $forward_arrow
+        $prompt += Write-Prompt -Object "$partial_path " -ForegroundColor $white -BackgroundColor $dark_cyan
+      }
+      else {
+        # Don't include drive letter
+        $partial_path = $($full_path.split($forward_arrow)[1..($full_path.length)])
+        $prompt += Write-Prompt -Object "$partial_path "-ForegroundColor $white -BackgroundColor $dark_cyan
+      }
+
+      # Adds Pre/Postfix to the VCS Prompt
+      $status = Get-VCSStatus
+      if ($status) {
+        $themeInfo = Get-VcsInfo -status ($status)
+        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $dark_cyan -BackgroundColor $magenta
+        $prompt += Write-Prompt -Object " $($themeInfo.VcInfo) " -BackgroundColor $magenta -ForegroundColor $black
+        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $magenta
+      }
+      else {
+        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $dark_cyan
+      }
+
+      $timestamp = Get-Date -f "T"
+
+      # Writes the Invocation time and date
+      $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 13)
+      $prompt += Write-Prompt $backward_symbol -ForegroundColor $dark_cyan
+      $prompt += Write-Prompt $(Get-Elapsed) -ForegroundColor $yellow -BackgroundColor $dark_cyan
+      $prompt += Write-Prompt $backward_symbol -ForegroundColor $blue -BackgroundColor $dark_cyan
+      $prompt += Write-Prompt $timestamp -ForegroundColor $yellow -BackgroundColor $blue
+
+      # Move the actual prompt to the next line and set the prompt
+      $prompt += Set-Newline
+
+      $prompt += Write-Prompt -Object " $heart_symbol " -ForegroundColor $red -BackgroundColor $gray
+      $prompt += Write-Prompt -Object "$forward_symbol " -ForegroundColor $gray
+      $prompt += ' '
+    }
+  }
+  end {
+    return $prompt
+   }
+}
