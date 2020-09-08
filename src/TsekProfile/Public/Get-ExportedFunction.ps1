@@ -11,8 +11,10 @@
   #>
   try {
     $functions = (Get-Command -Module 'TsekProfile' -CommandType Function).Name -join ', '
-    # TODO: Add color to function output.
-    Write-Output "Profile helper functions: $functions"
+
+    # Use [Console]::Write to prevent newlines.
+    [Console]::Write('Profile helper functions: ')
+    Write-Prompt $functions -ForegroundColor Green
   }
   catch {
     throw "Error obtaining helper function list: $_"
