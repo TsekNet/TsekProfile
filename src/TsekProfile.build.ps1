@@ -400,10 +400,10 @@ Add-BuildTask Build {
     Remove-Item "$($script:ArtifactsPath)\Imports.ps1" -Force -ErrorAction SilentlyContinue
   }
   # here you could move your docs up to your repos doc level if you wanted
-  # Write-Build Gray '        Overwriting docs output...'
-  # Move-Item "$($script:ArtifactsPath)\docs\*.md" -Destination "..\docs\" -Force
-  # Remove-Item "$($script:ArtifactsPath)\docs" -Recurse -Force -ErrorAction Stop
-  # Write-Build Gray '        ...Docs output completed.'
+  Write-Build Gray '        Overwriting docs output...'
+  Move-Item "$($script:ArtifactsPath)\docs\*.md" -Destination "..\docs\" -Force
+  Remove-Item "$($script:ArtifactsPath)\docs" -Recurse -Force -ErrorAction Stop
+  Write-Build Gray '        ...Docs output completed.'
 
   Write-Build Green '      ...Build Complete!'
 }#Build

@@ -43,4 +43,7 @@ Change the current directory.
 Updates the console title with information about the currently running
 environment.
 
+### [Update-Profile](Update-Profile.md)
+Update the PowerShell Profile.
+
 
