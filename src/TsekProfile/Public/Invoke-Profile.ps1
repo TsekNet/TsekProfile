@@ -1,4 +1,4 @@
-﻿function Update-Profile {
+﻿function Invoke-Profile {
   <#
 .SYNOPSIS
   Update the PowerShell Profile.
@@ -36,20 +36,20 @@
     Write-Verbose '==Removing default start up message=='
     Clear-Host
 
-    Write-Verbose '==Setting custom oh-my-posh theme=='
-    Set-Theme 'TsekNet' -Verbose:$false
+    Write-Verbose '==Setting custom prompt=='
+    # TODO: Investigate passing switch parameter dynamically to this function.
+    function global:prompt {
+      Set-CustomPrompt -Force
+    }
 
     Write-Verbose '==Checking console elevation=='
     Get-Elevation
 
     Write-Verbose '==Setting the console title=='
-    if ($ThemeSettings.Options) { $ThemeSettings.Options.ConsoleTitle = $false }
-    Set-WindowTitle -Force
+    Set-WindowTitle -Force:$Force
 
-    if ($Force -or $PSCmdlet.ShouldContinue($Path, 'Change current directory.')) {
-      Write-Verbose '==Setting the default directory for new PowerShell consoles=='
-      Set-Path 'C:\Tmp' -Force
-    }
+    Write-Verbose '==Setting the default directory for new PowerShell consoles=='
+    Set-Path 'C:\Tmp' -Force:$Force
 
     Write-Verbose '==Installing fonts if necessary=='
     Install-Font
