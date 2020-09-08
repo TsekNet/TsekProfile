@@ -27,7 +27,7 @@
     [System.IO.FileInfo]$Path,
     [switch]$Force
   )
-  if ($Force -or $PSCmdlet.ShouldContinue($Path, 'Change current directory.')) {
+  if ($Force -or $PSCmdlet.ShouldProcess($Path, 'change current directory.')) {
     Write-Verbose "Setting path to $Path."
     Set-Location $Path
   }
