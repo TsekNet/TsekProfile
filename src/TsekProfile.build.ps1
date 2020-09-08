@@ -271,7 +271,7 @@ Add-BuildTask CreateHelpStart {
   Write-Build Gray '           ...platyPS imported successfully.'
 
   Write-Build Gray "           Importing $ModuleName v$ModuleVersion ..."
-  Import-Module -Name $ModuleManifestFile -Global -Force -PassThru -ErrorAction Stop
+  Import-Module -Name $script:ModuleManifestFile -Global -Force -PassThru -ErrorAction Stop
   Write-Build Gray "           ...$ModuleName imported successfully."
 }#CreateHelpStart
 
