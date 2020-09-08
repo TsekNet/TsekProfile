@@ -26,24 +26,11 @@ Output the functions made available by this module.
 ### [Get-FileHash256](Get-FileHash256.md)
 Compute the SHA-256 hash for a given file.
 
-### [Install-Font](Install-Font.md)
-Download Powerline fonts from GitHub.
-
 ### [Install-Profile](Install-Profile.md)
 Copy the TsekNet PowerShell profile to the appropriate location, and execute
 the profile script.
 
 ### [Open-HistoryFile](Open-HistoryFile.md)
 Opens the PowerShell history file.
-
-### [Set-Path](Set-Path.md)
-Change the current directory.
-
-### [Set-WindowTitle](Set-WindowTitle.md)
-Updates the console title with information about the currently running
-environment.
-
-### [Update-Profile](Update-Profile.md)
-Update the PowerShell Profile.
 
 

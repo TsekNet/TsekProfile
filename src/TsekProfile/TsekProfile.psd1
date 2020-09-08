@@ -78,12 +78,8 @@
     'Get-Elevation',
     'Get-ExportedFunction',
     'Get-FileHash256',
-    'Install-Font',
     'Install-Profile',
-    'Open-HistoryFile',
-    'Set-Path',
-    'Set-WindowTitle'
-    'Update-Profile'
+    'Open-HistoryFile'
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
