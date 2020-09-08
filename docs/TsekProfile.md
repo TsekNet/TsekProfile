@@ -33,4 +33,7 @@ the profile script.
 ### [Open-HistoryFile](Open-HistoryFile.md)
 Opens the PowerShell history file.
 
+### [Write-Theme](Write-Theme.md)
+Custom oh-my-posh theme built by @TsekNet.
+
 

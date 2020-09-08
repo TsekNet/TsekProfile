@@ -51,7 +51,8 @@
   # ProcessorArchitecture = ''
 
   # Modules that must be imported into the global environment prior to importing this module
-  RequiredModules   = @('posh-git',
+  RequiredModules   = @(
+    'posh-git',
     'oh-my-posh',
     'Get-ChildItemColor',
     'PSWriteHTML')
@@ -79,7 +80,8 @@
     'Get-ExportedFunction',
     'Get-FileHash256',
     'Install-Profile',
-    'Open-HistoryFile'
+    'Open-HistoryFile',
+    'Write-Theme'
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
