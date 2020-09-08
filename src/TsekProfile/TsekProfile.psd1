@@ -72,36 +72,32 @@
   # NestedModules     = ''
 
   # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-  FunctionsToExport = @('Copy-LastCommand',
-    'Install-Profile',
-    'Update-Profile',
+  FunctionsToExport = @(
+    'Copy-LastCommand',
     'Edit-Profile',
     'Get-Elevation',
     'Get-ExportedFunction',
     'Get-FileHash256',
     'Install-Font',
+    'Install-Profile',
     'Open-HistoryFile',
     'Set-Path',
-    'Set-WindowTitle')
+    'Set-WindowTitle'
+    'Update-Profile'
+  )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-  CmdletsToExport   = @('Copy-LastCommand',
-    'Install-Profile',
-    'Update-Profile',
-    'Edit-Profile',
-    'Get-Elevation',
-    'Get-ExportedFunction',
-    'Get-FileHash256',
-    'Install-Font',
-    'Open-HistoryFile',
-    'Set-Path',
-    'Set-WindowTitle')
+  # CmdletsToExport   = ''
 
   # Variables to export from this module
-  VariablesToExport = '*'
+  # VariablesToExport = '*'
 
   # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-  AliasesToExport   = @('ll', 'ls', 'History')
+  AliasesToExport   = @(
+    'History',
+    'll',
+    'ls'
+  )
 
   # DSC resources to export from this module
   # DscResourcesToExport = @()
@@ -118,16 +114,33 @@
     PSData = @{
 
       # Tags applied to this module. These help with module discovery in online galleries.
-      Tags       = @('profile', 'automation', 'title', 'git', 'github', 'windows', 'custom')
+      Tags                     = @(
+        'Catesta',
+        'GitHub',
+        'GitHub-Actions',
+        'Plaster',
+        'Windows',
+        'automation',
+        'custom',
+        'git',
+        'platyPS',
+        'powrshell',
+        'profile',
+        'pwsh'
+        'title'
+      )
 
       # A URL to the license for this module.
-      # LicenseUri = ''
+      LicenseUri               = 'https://github.com/TsekNet/TsekProfile/blob/master/LICENSE'
+
+      # Flag to indicate whether the module requires explicit user acceptance for install/update/save
+      RequireLicenseAcceptance = $false
 
       # A URL to the main website for this project.
-      ProjectUri = 'https://tseknet.com'
+      ProjectUri               = 'https://tseknet.com'
 
       # A URL to an icon representing this module.
-      IconUri    = 'https://tseknet.com/assets/icons/icon-192x192.png'
+      IconUri                  = 'https://tseknet.com/assets/icons/icon-192x192.png'
 
       # ReleaseNotes of this module
       # ReleaseNotes = ''
@@ -137,7 +150,7 @@
   } # End of PrivateData hashtable
 
   # HelpInfo URI of this module
-  # HelpInfoURI       = ''
+  HelpInfoURI       = 'https://github.com/TsekNet/TsekProfile/tree/master/docs'
 
   # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
   # DefaultCommandPrefix = ''
