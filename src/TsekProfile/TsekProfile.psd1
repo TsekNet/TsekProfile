@@ -53,9 +53,9 @@
   # Modules that must be imported into the global environment prior to importing this module
   RequiredModules   = @(
     'posh-git',
-    'oh-my-posh',
     'Get-ChildItemColor',
-    'PSWriteHTML')
+    'PSWriteHTML'
+    )
 
   # Assemblies that must be loaded prior to importing this module
   # RequiredAssemblies = @()
@@ -80,8 +80,9 @@
     'Get-ExportedFunction',
     'Get-FileHash256',
     'Install-Profile',
+    'Invoke-Profile',
     'Open-HistoryFile',
-    'Write-Theme'
+    'Set-CustomPrompt'
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -90,12 +91,9 @@
   # Variables to export from this module
   # VariablesToExport = '*'
 
+  # TODO: Investigate exporting aliases via module manifest.
   # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-  AliasesToExport   = @(
-    'History',
-    'll',
-    'ls'
-  )
+  # AliasesToExport   = ''
 
   # DSC resources to export from this module
   # DscResourcesToExport = @()

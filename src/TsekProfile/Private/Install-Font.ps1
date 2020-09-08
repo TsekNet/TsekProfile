@@ -4,7 +4,7 @@
     Download Powerline fonts from GitHub.
   .DESCRIPTION
     Powerline fonts are required for the custom characters that are used in the
-    oh-my-posh theme that this profile uses.
+    custom prompt.
   .PARAMETER FontPath
    Fully qualified path to install the selected font to.
   .EXAMPLE

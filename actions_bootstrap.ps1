@@ -35,11 +35,6 @@ $null = $modulesToInstall.Add(([PSCustomObject]@{
       ModuleName = 'posh-git'
     }))
 
-# https://github.com/JanDeDobbeleer/oh-my-posh
-$null = $modulesToInstall.Add(([PSCustomObject]@{
-      ModuleName = 'oh-my-posh'
-    }))
-
 # https://github.com/joonro/Get-ChildItemColor
 $null = $modulesToInstall.Add(([PSCustomObject]@{
       ModuleName = 'Get-ChildItemColor'

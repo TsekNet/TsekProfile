@@ -30,10 +30,13 @@ Compute the SHA-256 hash for a given file.
 Copy the TsekNet PowerShell profile to the appropriate location, and execute
 the profile script.
 
+### [Invoke-Profile](Invoke-Profile.md)
+Update the PowerShell Profile.
+
 ### [Open-HistoryFile](Open-HistoryFile.md)
 Opens the PowerShell history file.
 
-### [Write-Theme](Write-Theme.md)
+### [Set-CustomPrompt](Set-CustomPrompt.md)
 Custom oh-my-posh theme built by @TsekNet.
 
 

@@ -1,22 +1,31 @@
 ﻿function Set-CustomPrompt {
   <#
   .SYNOPSIS
-    Custom oh-my-posh theme built by @TsekNet.
+    Custom PowerShell prompt.
   .DESCRIPTION
-    This module is a custom theme lerages the oh-my-posh Powerline module.
+    This prompt adds the following functionality:
 
-    You should be able to just run Set-Theme TsekNet if you've already got
-    oh-my-posh installed. if you're missing oh-my-posh you'll see errors in the
-    console.
+    1. Invocation ID count (how many times a command was executed)
+    2. The custom output of the current directory, with optional trimming if the current directory is determined to be too long.
+    3. Posh-Git integration
+    4. Built-in timers for each command executed in the console
+    5. The current local time
+    6. A custom ASCII symbol placed before the cursor
+  .PARAMETER Symbol
+    ASCII code for the symbol placed before the cursor in the console.
   .PARAMETER Force
     Controls whether or not the user is prompted to change their prompt.
   .EXAMPLE
-    Set-CustomPrompt TsekNet
+    Set-CustomPrompt -Symbol '26A1' -Force
 
-    Leverages the oh-my-posh Set-Theme function to define select this theme.
+    Forces the prompt to change, using the 'High Voltage' Emoji (⚡) as the
+    ASCII character is placed before the cursor.
+  .NOTES
+    This theme has taken inspiration heavily from the Agnoster oh-my-posh theme.
   #>
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param (
+    [string]$Symbol = '2764', # Heart
     [switch]$Force
   )
 
@@ -31,10 +40,11 @@
     $white = [System.ConsoleColor]::White
     $yellow = [System.ConsoleColor]::Yellow
 
+    $custom_symbol = [char]::ConvertFromUtf32("0x$Symbol")
+
     $forward_arrow = [char]::ConvertFromUtf32(0xE0B1)
     $backward_symbol = [char]::ConvertFromUtf32(0xE0B2)
     $forward_symbol = [char]::ConvertFromUtf32(0xE0B0)
-    $heart_symbol = [char]::ConvertFromUtf32(0x2764)
     $warning_symbol = [char]::ConvertFromUtf32(0x203C)
     $start_symbol = ''
   }
@@ -108,7 +118,7 @@
       # Move the actual prompt to the next line and set the prompt
       $prompt += Set-Newline
 
-      $prompt += Write-Prompt -Object " $heart_symbol " -ForegroundColor $red -BackgroundColor $gray
+      $prompt += Write-Prompt -Object " $custom_symbol " -ForegroundColor $red -BackgroundColor $gray
       $prompt += Write-Prompt -Object "$forward_symbol " -ForegroundColor $gray
       $prompt += ' '
     }
