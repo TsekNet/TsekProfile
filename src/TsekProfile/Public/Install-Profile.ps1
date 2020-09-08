@@ -23,11 +23,20 @@
   )
 
   $profile_dir = Split-Path $PROFILE.$Scope
+  $theme_dir = $ThemeSettings.MyThemesLocation
+  $theme_file = "$theme_dir\TsekNet.psm1"
 
   if (-not (Test-Path $profile_dir)) {
     New-Item -Path $profile_dir -ItemType Directory | Out-Null
     Write-Verbose "Created new profile directory: $profile_dir"
   }
+
+  if (-not (Test-Path $theme_dir)) {
+    New-Item -Path $theme_dir -ItemType Directory | Out-Null
+    Write-Verbose "Created new oh-my-posh themes directory: $theme_dir"
+  }
+
+  Set-Content -Path $theme_file -Value 'Write-Theme'
 
   Set-Content -Path $profile.CurrentUserAllHosts -Value 'Update-Profile'
   Update-Profile

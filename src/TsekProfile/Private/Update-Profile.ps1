@@ -37,7 +37,6 @@
     Clear-Host
 
     Write-Verbose '==Setting custom oh-my-posh theme=='
-    # TODO: Add theme to new profile module
     Set-Theme 'TsekNet' -Verbose:$false
 
     Write-Verbose '==Checking console elevation=='
