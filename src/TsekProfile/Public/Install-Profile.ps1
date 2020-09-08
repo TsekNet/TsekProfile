@@ -23,14 +23,12 @@
   )
 
   $profile_dir = Split-Path $PROFILE.$Scope
-  $profile_file = $profile.$Scope
 
   if (-not (Test-Path $profile_dir)) {
     New-Item -Path $profile_dir -ItemType Directory | Out-Null
     Write-Verbose "Created new profile directory: $profile_dir"
   }
 
-  Copy-Item -Path "$PSScriptRoot\profile.ps1" -Destination $profile_file -Force
-  Write-Verbose "Copied profile from $PSScriptRoot\profile.ps1 to $profile_file"
-  & $profile_file -Verbose
+  Set-Content -Path $profile.CurrentUserAllHosts -Value 'Update-Profile'
+  Update-Profile
 }
