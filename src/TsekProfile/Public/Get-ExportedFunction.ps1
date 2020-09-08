@@ -13,7 +13,7 @@
     $functions = (Get-Command -Module 'TsekProfile' -CommandType Function).Name -join ', '
 
     # Use [Console]::Write to prevent newlines.
-    [Console]::Write('Profile helper functions: ')
+    $Host.UI.Write('Profile helper functions: ')
     Write-Prompt $functions -ForegroundColor Green
   }
   catch {

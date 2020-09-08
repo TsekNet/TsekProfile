@@ -37,6 +37,6 @@ Update the PowerShell Profile.
 Opens the PowerShell history file.
 
 ### [Set-CustomPrompt](Set-CustomPrompt.md)
-Custom oh-my-posh theme built by @TsekNet.
+Custom PowerShell prompt.
 
 

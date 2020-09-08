@@ -8,32 +8,56 @@ schema: 2.0.0
 # Set-CustomPrompt
 
 ## SYNOPSIS
-Custom oh-my-posh theme built by @TsekNet.
+Custom PowerShell prompt.
 
 ## SYNTAX
 
 ```
-Set-CustomPrompt [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-CustomPrompt [[-Symbol] <String>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This module is a custom theme lerages the oh-my-posh Powerline module.
+This prompt adds the following functionality:
 
-You should be able to just run Set-Theme TsekNet if you've already got
-oh-my-posh installed.
-if you're missing oh-my-posh you'll see errors in the
-console.
+1.
+Invocation ID count (how many times a command was executed)
+2.
+The custom output of the current directory, with optional trimming if the current directory is determined to be too long.
+3.
+Posh-Git integration
+4.
+Built-in timers for each command executed in the console
+5.
+The current local time
+6.
+A custom ASCII symbol placed before the cursor
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-CustomPrompt TsekNet
+Set-CustomPrompt -Symbol '26A1' -Force
 ```
 
-Leverages the oh-my-posh Set-Theme function to define select this theme.
+Forces the prompt to change, using the 'High Voltage' Emoji (⚡) as the
+ASCII character is placed before the cursor.
 
 ## PARAMETERS
+
+### -Symbol
+ASCII code for the symbol placed before the cursor in the console.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: 2764
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Force
 Controls whether or not the user is prompted to change their prompt.
@@ -90,5 +114,6 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## OUTPUTS
 
 ## NOTES
+This theme has taken inspiration heavily from the Agnoster oh-my-posh theme.
 
 ## RELATED LINKS
