@@ -14,7 +14,7 @@
 
     # Use [Console]::Write to prevent newlines.
     $Host.UI.Write('Profile helper functions: ')
-    Write-Prompt $functions -ForegroundColor Green
+    Write-Prompt "$functions`n" -ForegroundColor Green
   }
   catch {
     throw "Error obtaining helper function list: $_"
