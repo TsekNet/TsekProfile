@@ -29,6 +29,6 @@
     Write-Verbose "Created new profile directory: $profile_dir"
   }
 
-  Set-Content -Path $profile.CurrentUserAllHosts -Value 'Invoke-Profile -Force'
+  Set-Content -Path $profile.CurrentUserAllHosts -Value 'Import-Module TsekProfile; Invoke-Profile -Force'
   Invoke-Profile -Force -Verbose
 }

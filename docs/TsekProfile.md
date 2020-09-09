@@ -17,9 +17,6 @@ Copies the last command to the clipboard.
 ### [Edit-Profile](Edit-Profile.md)
 Opens the $profile file an editor.
 
-### [Get-Elevation](Get-Elevation.md)
-Detects whether Powershell is running as administrator.
-
 ### [Get-ExportedFunction](Get-ExportedFunction.md)
 Output the functions made available by this module.
 

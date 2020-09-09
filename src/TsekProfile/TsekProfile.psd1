@@ -76,7 +76,6 @@
   FunctionsToExport = @(
     'Copy-LastCommand',
     'Edit-Profile',
-    'Get-Elevation',
     'Get-ExportedFunction',
     'Get-FileHash256',
     'Install-Profile',

@@ -59,9 +59,9 @@
     Set-PSReadLineOption -ShowToolTips -BellStyle Visual -HistoryNoDuplicates
 
     Write-Verbose '==Setting aliases=='
-    Set-Alias ll Get-ChildItemColor -Option AllScope
-    Set-Alias ls Get-ChildItemColorFormatWide -Option AllScope
-    Set-Alias History Open-HistoryFile -Option AllScope
+    Set-Alias -Name ll -Value Get-ChildItemColor -Scope Global -Option AllScope
+    Set-Alias -Name ls -Value Get-ChildItemColorFormatWide -Scope Global -Option AllScope
+    Set-Alias -Name History -Value Open-HistoryFile -Scope Global -Option AllScope
 
     Write-Verbose '==Getting and displaying list of helper functions=='
     Get-ExportedFunction
