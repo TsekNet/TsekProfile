@@ -22,7 +22,7 @@ jobs:
       run: $PSVersionTable
     - name: Bootstrap
       shell: powershell
-      run: Install-Module PSDepend; Import-Module PSDepend; Invoke-PSDepend ./requirements.psd1 -Verbose -Force
+      run: Install-Module PSDepend -Force; Import-Module PSDepend; Invoke-PSDepend ./requirements.psd1 -Verbose -Force
     - name: Test and Build
       shell: powershell
       run: Remove-Module Pester -ErrorAction SilentlyContinue;Import-Module Pester -RequiredVersion 4.10.1;Invoke-Build -File .\src\TsekProfile.build.ps1
