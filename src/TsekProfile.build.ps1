@@ -8,7 +8,7 @@
         - FormattingCheck
         - Analyze
         - Test
-        - CreateHelpStart
+        - ImportModule
         - Build
         - InfraTest
         - Archive
@@ -36,7 +36,7 @@ $str = @()
 $str = 'Clean', 'ValidateRequirements'
 $str += 'FormattingCheck'
 $str += 'Analyze', 'Test'
-$str += 'CreateHelpStart'
+$str += 'ImportModule'
 $str += 'Build', 'InfraTest', 'Archive'
 Add-BuildTask -Name . -Jobs $str
 
@@ -44,7 +44,7 @@ Add-BuildTask -Name . -Jobs $str
 Add-BuildTask TestLocal Clean, Analyze, Test
 
 #Local help file creation process
-Add-BuildTask HelpLocal Clean, CreateHelpStart, UpdateCBH
+Add-BuildTask HelpLocal Clean, ImportModule, UpdateCBH
 
 # Pre-build variables to be used by other portions of the script
 Enter-Build {
@@ -262,21 +262,17 @@ Add-BuildTask DevCC {
   Write-Build Green '      ...Code Coverage report generated!'
 }#DevCC
 
-# Synopsis: Build help for module
-Add-BuildTask CreateHelpStart {
+# Synopsis: Import Module prior to generating help
+Add-BuildTask ImportModule {
   Write-Build White '      Performing all help related actions.'
-
-  Write-Build Gray '           Importing platyPS v0.12.0 ...'
-  Import-Module platyPS -RequiredVersion 0.12.0 -Global -Force -PassThru -ErrorAction Stop
-  Write-Build Gray '           ...platyPS imported successfully.'
 
   Write-Build Gray "           Importing $ModuleName v$ModuleVersion ..."
   Import-Module -Name $script:ModuleManifestFile -Global -Force -PassThru -ErrorAction Stop
   Write-Build Gray "           ...$ModuleName imported successfully."
-}#CreateHelpStart
+}#ImportModule
 
 # Synopsis: Build markdown help files for module and fail if help information is missing
-Add-BuildTask CreateMarkdownHelp -After CreateHelpStart {
+Add-BuildTask CreateMarkdownHelp -After ImportModule {
   $ModulePage = "$($script:ArtifactsPath)\docs\$($ModuleName).md"
 
   $markdownParams = @{
@@ -340,7 +336,7 @@ Add-BuildTask CreateExternalHelp -After CreateMarkdownHelp {
 
 Add-BuildTask CreateHelpComplete -After CreateExternalHelp {
   Write-Build Green '      ...CreateHelp Complete!'
-}#CreateHelpStart
+}#CreateHelpComplete
 
 # Synopsis: Replace comment based help (CBH) with external help in all public functions for this project
 Add-BuildTask UpdateCBH -After AssetCopy {
