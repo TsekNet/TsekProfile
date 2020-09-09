@@ -15,8 +15,11 @@ My heavily customized Powershell profile.
 See my [blog post](https://tseknet.com/blog/psprofile) about for more
 information.
 
-Included is my profile.ps1 script, along with a module which contains the
-required logic required for the profile script to execute.
+## Getting Started
+
+### Installing TsekProfile
+
+## Getting Help
 
 ## Contributing
 
