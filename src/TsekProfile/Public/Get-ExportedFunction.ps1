@@ -10,7 +10,7 @@
     Get-ExportedFunction
   #>
   try {
-    $functions = (Get-Command -Module 'TsekProfile' -CommandType Function).Name -join ', '
+    $functions = (Get-Module -Name TsekProfile).ExportedCommands.Values.Name -join ', '
 
     # Use [Console]::Write to prevent newlines.
     $Host.UI.Write('Profile helper functions: ')
