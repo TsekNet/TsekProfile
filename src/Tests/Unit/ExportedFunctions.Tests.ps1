@@ -46,7 +46,7 @@ Describe -Name $ModuleName -Fixture {
                     $help.description.Text | Should -Not -BeNullOrEmpty
                 }
 
-                It -Name 'Includes an example' -Test {
+                It -Name 'Includes an Example' -Test {
                     $help.examples.example | Should -Not -BeNullOrEmpty
                 }
             }
