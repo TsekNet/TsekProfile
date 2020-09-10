@@ -224,7 +224,7 @@ Add-BuildTask Test {
 
     # Ensure our builds fail until if below a minimum defined code test coverage
     # threshold
-    # TODO: Raise this threshold once there is most test coverage.
+    # TODO: Raise this threshold once there is more test coverage.
     $coverageThreshold = 1
 
     if ($testResults.CodeCoverage.NumberOfCommandsExecuted -ne 0) {
@@ -273,7 +273,7 @@ Add-BuildTask ImportModule {
   foreach ($dependency in $Dependencies) {
     if (-not (Test-Dependency -Dependency $dependency -Quiet)) {
       Write-Build DarkGray "        Installing $($dependency.DependencyName) v$($dependency.Version) ..."
-      Install-Dependency -Dependency $dependency | Import-Dependency
+      Install-Dependency -Dependency $dependency
       Write-Build DarkGray "        Importing $($dependency.DependencyName) v$($dependency.Version) ..."
       Import-Dependency -Dependency $dependency
     }
