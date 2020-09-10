@@ -222,8 +222,10 @@ Add-BuildTask Test {
     $numberFails = $testResults.FailedCount
     Assert-Build($numberFails -eq 0) ('Failed "{0}" unit tests.' -f $numberFails)
 
-    # Ensure our builds fail until if below a minimum defined code test coverage threshold
-    $coverageThreshold = 50
+    # Ensure our builds fail until if below a minimum defined code test coverage
+    # threshold
+    # TODO: Raise this threshold once there is most test coverage.
+    $coverageThreshold = 1
 
     if ($testResults.CodeCoverage.NumberOfCommandsExecuted -ne 0) {
       $coveragePercent = '{0:N2}' -f ($testResults.CodeCoverage.NumberOfCommandsExecuted / $testResults.CodeCoverage.NumberOfCommandsAnalyzed * 100)
@@ -264,11 +266,22 @@ Add-BuildTask DevCC {
 
 # Synopsis: Import Module prior to generating help
 Add-BuildTask ImportModule {
-  Write-Build White '      Performing all help related actions.'
+  Write-Build White '      Installing required module dependencies.'
 
-  Write-Build Gray "           Importing $ModuleName v$ModuleVersion ..."
+  $Dependencies = Get-Dependency -Path ..\requirements.psd1
+
+  foreach ($dependency in $Dependencies) {
+    if (-not (Test-Dependency -Dependency $dependency -Quiet)) {
+      Write-Build DarkGray "        Installing $($dependency.DependencyName) v$($dependency.Version) ..."
+      Install-Dependency -Dependency $dependency | Import-Dependency
+      Write-Build DarkGray "        Importing $($dependency.DependencyName) v$($dependency.Version) ..."
+      Import-Dependency -Dependency $dependency
+    }
+  }
+
+  Write-Build DarkGray "        Importing $ModuleName v$ModuleVersion ..."
   Import-Module -Name $script:ModuleManifestFile -Global -Force -PassThru -ErrorAction Stop
-  Write-Build Gray "           ...$ModuleName imported successfully."
+  Write-Build Green "      ...Dependency Installation Complete!"
 }#ImportModule
 
 # Synopsis: Build markdown help files for module and fail if help information is missing
@@ -306,22 +319,44 @@ Add-BuildTask CreateMarkdownHelp -After ImportModule {
   $Script:FunctionsToExport | ForEach-Object {
     Write-Build DarkGray "             Updating definition for the following function: $($_)"
     $TextToReplace = "{{Manually Enter $($_) Description Here}}"
-    $ReplacementText = (Get-Help -Detailed $_).SYNOPSIS
+    $ReplacementText = (Get-Help -Detailed $_).Synopsis
     $ModulePageFileContent = $ModulePageFileContent -replace $TextToReplace, $ReplacementText
   }
 
   $ModulePageFileContent | Out-File $ModulePage -Force -Encoding:utf8
   Write-Build Gray '           ...Markdown replacements complete.'
 
-  Write-Build Gray '           Verifying documentation...'
+  Write-Build Gray '           Verifying GUID...'
+  $MissingGUID = Select-String -Path "$($script:ArtifactsPath)\docs\*.md" -Pattern "(00000000-0000-0000-0000-000000000000)"
+  if ($MissingGUID.Count -gt 0) {
+    Write-Build Yellow '             The documentation that got generated resulted in a generic GUID. Check the GUID entry of your module manifest.'
+    throw 'Missing GUID. Please review and rebuild.'
+  }
+
+  Write-Build Gray '           Checking for missing documentation in md files...'
   $MissingDocumentation = Select-String -Path "$($script:ArtifactsPath)\docs\*.md" -Pattern "({{.*}})"
   if ($MissingDocumentation.Count -gt 0) {
     Write-Build Yellow '             The documentation that got generated resulted in missing sections which should be filled out.'
     Write-Build Yellow '             Please review the following sections in your comment based help, fill out missing information and rerun this build:'
     Write-Build Yellow '             (Note: This can happen if the .EXTERNALHELP CBH is defined for a function before running this build.)'
     Write-Build Yellow "             Path of files with issues: $($script:ArtifactsPath)\docs\"
-    $MissingDocumentation | Select-Object FileName, Line | Format-Table -AutoSize
+    $MissingDocumentation | Select-Object FileName, LineNumber, Line | Format-Table -AutoSize
     throw 'Missing documentation. Please review and rebuild.'
+  }
+
+  Write-Build Gray '           Checking for missing SYNOPSIS in md files...'
+  $fSynopsisOutput = @()
+  $synopsisEval = Select-String -Path "$($script:ArtifactsPath)\docs\*.md" -Pattern "^## SYNOPSIS$" -Context 0, 1
+  $synopsisEval | ForEach-Object {
+    $chAC = $_.Context.DisplayPostContext.ToCharArray()
+    if ($null -eq $chAC) {
+      $fSynopsisOutput += $_.FileName
+    }
+  }
+  if ($fSynopsisOutput) {
+    Write-Build Yellow "             The following files are missing SYNOPSIS:"
+    $fSynopsisOutput
+    throw 'SYNOPSIS information missing. Please review.'
   }
 
   Write-Build Gray '           ...Markdown generation complete.'
