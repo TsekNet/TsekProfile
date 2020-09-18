@@ -31,7 +31,7 @@ Install-Profile
 ## Usage
 
 TsekProfile leverages [platyPS](https://github.com/PowerShell/platyPS) to
-automatically generate Markdown documentation. See [docs](/docs) to get started.
+automatically generate Markdown documentation. See [docs](/docs/TsekProfile.md) to get started.
 
 ## Screenshots
 

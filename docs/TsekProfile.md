@@ -8,7 +8,7 @@ Locale: en-US
 
 # TsekProfile Module
 ## Description
-My heavily customized PowerShell profile.
+TsekProfile is a PowerShell profile that adds built-in functionality to your PowerShell experience.
 
 ## TsekProfile Cmdlets
 ### [Copy-LastCommand](Copy-LastCommand.md)

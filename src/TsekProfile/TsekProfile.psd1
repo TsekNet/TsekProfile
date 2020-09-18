@@ -30,7 +30,7 @@
   Copyright         = '(c) 2020 Dan Tsekhanskiy. All rights reserved.'
 
   # Description of the functionality provided by this module
-  Description       = 'My heavily customized PowerShell profile.'
+  Description       = 'TsekProfile is a PowerShell profile that adds built-in functionality to your PowerShell experience.'
 
   # Minimum version of the Windows PowerShell engine required by this module
   PowerShellVersion = '5.1'
