@@ -49,8 +49,6 @@ The following (awesome) modules will be installed by default:
 
 1. [posh-git](https://github.com/dahlbyk/posh-git): Integrates Git and
    PowerShell by providing Git status summary information
-1. [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh): Theme engine for
-   PowerShell
 1. [Get-ChildItemColor](https://github.com/joonro/Get-ChildItemColor): Provides
    colorization of outputs of `Get-ChildItem` Cmdlet of PowerShell
 1. [PSWriteHTML](https://github.com/EvotecIT/PSWriteHTML): Output PowerShell
