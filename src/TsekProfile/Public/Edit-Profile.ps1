@@ -1,5 +1,4 @@
-﻿# Make it easy to edit this profile once it's installed
-function Edit-Profile {
+﻿function Edit-Profile {
   <#
   .SYNOPSIS
     Opens the $profile file an editor.
@@ -15,15 +14,9 @@ function Edit-Profile {
 
   $PATH = $profile.CurrentUserAllHosts
 
-  switch ($host.Name) {
-    'Windows PowerShell ISE Host' { $psISE.CurrentPowerShellTab.Files.Add($PATH) }
-    'Visual Studio Code Host' {
-      $editor = 'code.cmd'
-      if ($env:TERM_PROGRAM_VERSION -like '*insider') {
-        $editor = 'code-insiders.cmd'
-      }
-      & $editor $PATH
-    }
-    default { notepad $PATH }
+  switch ((Get-Host).Name) {
+    'Visual Studio Code Host' { Open-EditorFile $PATH }
+    'Windows PowerShell ISE Host' { psedit $PATH }
+    default { Start-Process "$env:windir\system32\notepad.exe" -ArgumentList @($PATH) }
   }
 }
