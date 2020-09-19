@@ -10,12 +10,14 @@ InModuleScope $MODULE {
   Describe "Edit-Profile function tests" -Tag Unit {
     It "Edit profile in Visual Studio Code" {
       Mock Get-Host { @{  Name = 'Visual Studio Code Host' } }
+      function Open-EditorFile {}
       Mock Open-EditorFile
       Edit-Profile
       Assert-MockCalled Open-EditorFile
     }
     It "Edit profile in PowerShell ISE" {
       Mock Get-Host { @{  Name = 'Windows PowerShell ISE Host' } }
+      function psedit {}
       Mock psedit
       Edit-Profile
       Assert-MockCalled psedit
