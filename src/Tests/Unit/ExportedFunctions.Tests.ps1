@@ -1,15 +1,14 @@
-#-------------------------------------------------------------------------
+#region Test Configuration
 Set-Location -Path $PSScriptRoot
-#-------------------------------------------------------------------------
 $ModuleName = 'TsekProfile'
 $PathToManifest = [System.IO.Path]::Combine('..', '..', $ModuleName, "$ModuleName.psd1")
-#-------------------------------------------------------------------------
+# If the module is already in memory, remove it
 if (Get-Module -Name $ModuleName -ErrorAction 'SilentlyContinue') {
-    #if the module is already in memory, remove it
     Remove-Module -Name $ModuleName -Force
 }
 Import-Module $PathToManifest -Force
-#-------------------------------------------------------------------------
+#endregion
+
 Describe -Name $ModuleName -Fixture {
 
     $manifestContent = Test-ModuleManifest -Path $PathToManifest

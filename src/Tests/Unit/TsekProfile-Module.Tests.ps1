@@ -1,10 +1,10 @@
-#-------------------------------------------------------------------------
+#region Test Configuration
 Set-Location -Path $PSScriptRoot
-#-------------------------------------------------------------------------
 $ModuleName = 'TsekProfile'
 $PathToManifest = [System.IO.Path]::Combine('..', '..', $ModuleName, "$ModuleName.psd1")
 $PathToModule = [System.IO.Path]::Combine('..', '..', $ModuleName, "$ModuleName.psm1")
-#-------------------------------------------------------------------------
+#endregion
+
 Describe 'Module Tests' -Tag Unit {
     Context "Module Tests" {
         It 'Passes Test-ModuleManifest' {

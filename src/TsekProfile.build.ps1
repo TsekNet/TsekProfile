@@ -258,7 +258,7 @@ Add-BuildTask DevCC {
   $invokePesterParams = @{
     Path                   = 'Tests\Unit'
     CodeCoverage           = "$ModuleName\*\*.ps1"
-    CodeCoverageOutputFile = '..\..\..\cov.xml'
+    CodeCoverageOutputFile = '.\cov.xml'
   }
   Invoke-Pester @invokePesterParams
   Write-Build Green '      ...Code Coverage report generated!'

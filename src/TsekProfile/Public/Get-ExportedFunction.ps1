@@ -9,14 +9,19 @@
   .EXAMPLE
     Get-ExportedFunction
   #>
-  try {
-    $functions = (Get-Module -Name TsekProfile).ExportedCommands.Values.Name -join ', '
+  $module = Get-Module -Name TsekProfile
 
-    # Use [Console]::Write to prevent newlines.
-    $Host.UI.Write('Profile helper functions: ')
-    Write-Prompt "$functions`n" -ForegroundColor Green
+  if (-not $module) {
+    throw 'Failed to locate TsekProfile module.'
   }
-  catch {
-    throw "Error obtaining helper function list: $_"
+
+  $functions = $module.ExportedCommands.Values.Name -join ', '
+
+  if (-not $functions) {
+    throw 'Failed to determine exported TsekProfile functions.'
   }
+
+  # Use [Console]::Write to prevent newlines.
+  Write-Host 'Profile helper functions: ' -NoNewline
+  Write-Host $functions -ForegroundColor Green
 }
