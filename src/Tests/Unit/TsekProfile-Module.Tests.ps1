@@ -11,11 +11,11 @@ Describe 'Module Tests' -Tag Unit {
             Test-ModuleManifest -Path $PathToManifest | Should Not BeNullOrEmpty
             $? | Should Be $true
         }#manifestTest
-        It 'root module TsekProfile.psm1 should exist' {
+        It 'Root module TsekProfile.psm1 should exist' {
             $PathToModule | Should Exist
             $? | Should Be $true
         }#psm1Exists
-        It 'manifest should contain TsekProfile.psm1' {
+        It 'Manifest should contain TsekProfile.psm1' {
             $PathToManifest |
                 Should -FileContentMatchExactly "TsekProfile.psm1"
         }#validPSM1
