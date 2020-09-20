@@ -5,6 +5,8 @@
   .DESCRIPTION
     Powerline fonts are required for the custom characters that are used in the
     custom prompt.
+  .LINK
+    https://github.com/powerline/fonts/blob/master/samples/All.md
   .PARAMETER FontPath
    Fully qualified path to install the selected font to.
   .EXAMPLE
