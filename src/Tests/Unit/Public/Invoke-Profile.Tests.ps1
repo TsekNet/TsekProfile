@@ -10,11 +10,14 @@ InModuleScope $MODULE {
   Describe "Invoke-Profile function tests" -Tag Unit {
     It "Called function test" {
       Mock Clear-Host
+      function Test-Administrator {}
       Mock Test-Administrator
       Invoke-Profile
       Assert-MockCalled Clear-Host
     }
     It "global:prompt function test" {
+      function Test-Administrator {}
+      Mock Test-Administrator
       Mock Set-CustomPrompt
       global:prompt
       Assert-MockCalled Set-CustomPrompt
