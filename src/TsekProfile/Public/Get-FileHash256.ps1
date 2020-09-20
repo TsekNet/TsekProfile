@@ -20,6 +20,7 @@
   }
 
   $sha_256_hash = (Get-FileHash -Algorithm SHA256 $Path).hash
-  Write-Output "Hash for $args is '$sha_256_hash' (copied to clipboard)."
+  Write-Host "SHA-256 hash copied to clipboard for $Path`: " -NoNewline
+  Write-Host $sha_256_hash -ForegroundColor Green
   return $sha_256_hash | Set-Clipboard
 }
