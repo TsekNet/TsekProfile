@@ -187,10 +187,10 @@ Add-BuildTask Test {
   $codeCovPath = "$script:ArtifactsPath\ccReport\"
   $testOutPutPath = "$script:ArtifactsPath\testOutput\"
   if (-not(Test-Path $codeCovPath)) {
-    New-Item -Path $codeCovPath -ItemType Directory | Out-Null
+    $null = New-Item -Path $codeCovPath -ItemType Directory
   }
   if (-not(Test-Path $testOutPutPath)) {
-    New-Item -Path $testOutPutPath -ItemType Directory | Out-Null
+    $null = New-Item -Path $testOutPutPath -ItemType Directory
   }
   if (Test-Path -Path $script:UnitTestsPath) {
     $invokePesterParams = @{
