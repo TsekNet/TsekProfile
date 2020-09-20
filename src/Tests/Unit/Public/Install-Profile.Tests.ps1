@@ -19,12 +19,11 @@ InModuleScope $MODULE {
       Mock Test-Path { return $false }
       Mock New-Item
       Mock Write-Verbose
-      Mock Set-Content
       Mock Invoke-Profile
       Install-Profile
       Assert-MockCalled New-Item
       Assert-MockCalled Write-Verbose
-      Assert-MockCalled Set-Content
+      $profile.CurrentUserAllHosts | Should -FileContentMatchExactly 'Import-Module TsekProfile; Invoke-Profile -Force'
       Assert-MockCalled Invoke-Profile
     }
   }
