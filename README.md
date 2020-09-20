@@ -54,6 +54,9 @@ The following (awesome) modules will be installed by default:
 1. [PSWriteHTML](https://github.com/EvotecIT/PSWriteHTML): Output PowerShell
    commands to a formatted HTML page
 
+Honorable mention: The [PowerLine](https://github.com/Jaykul/PowerLine) module,
+which sparked the idea for this module's development.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
