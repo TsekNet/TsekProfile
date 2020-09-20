@@ -19,13 +19,13 @@
   [CmdletBinding()]
   param(
     [ValidateSet('AllUsersAllHosts', 'AllUsersCurrentHost', 'CurrentUserAllHosts', 'CurrentUserCurrentHost')]
-    [string]$Scope = "CurrentUserAllHosts"
+    [string]$Scope = 'CurrentUserAllHosts'
   )
 
   $profile_dir = Split-Path $PROFILE.$Scope
 
   if (-not (Test-Path $profile_dir)) {
-    New-Item -Path $profile_dir -ItemType Directory | Out-Null
+    $null = New-Item -Path $profile_dir -ItemType Directory
     Write-Verbose "Created new profile directory: $profile_dir"
   }
 
