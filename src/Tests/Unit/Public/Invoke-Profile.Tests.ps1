@@ -4,7 +4,6 @@ $MODULE = 'TsekProfile'
 Get-Module $MODULE | Remove-Module -Force
 $MANIFEST = [System.IO.Path]::Combine('..', '..', '..', $MODULE, "$MODULE.psd1")
 Import-Module $MANIFEST -Force
-Import-Module -Name oh-my-posh
 #endregion
 
 InModuleScope $MODULE {
