@@ -12,8 +12,10 @@ InModuleScope $MODULE {
       Mock Clear-Host
       function Test-Administrator {}
       Mock Test-Administrator
+      Mock Install-Font
       Invoke-Profile
       Assert-MockCalled Clear-Host
+      Assert-MockCalled Install-Font
     }
     It "global:prompt function test" {
       function Test-Administrator {}
