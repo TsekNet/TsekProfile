@@ -14,15 +14,9 @@
 
   $HISTORY_PATH = (Get-PSReadLineOption).HistorySavePath
 
-  switch ($host.Name) {
-    'Windows PowerShell ISE Host' { $psISE.CurrentPowerShellTab.Files.Add($HISTORY_PATH) }
-    'Visual Studio Code Host' {
-      $editor = 'code.cmd'
-      if ($env:TERM_PROGRAM_VERSION -like '*insider') {
-        $editor = 'code-insiders.cmd'
-      }
-      & $editor $HISTORY_PATH
-    }
-    default { notepad $HISTORY_PATH }
+  switch ((Get-Host).Name) {
+    'Visual Studio Code Host' { Open-EditorFile $HISTORY_PATH }
+    'Windows PowerShell ISE Host' { psedit $HISTORY_PATH }
+    default { Start-Process "$env:windir\system32\notepad.exe" -ArgumentList @($HISTORY_PATH) }
   }
 }
