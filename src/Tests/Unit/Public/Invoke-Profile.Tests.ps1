@@ -4,12 +4,14 @@ $MODULE = 'TsekProfile'
 Get-Module $MODULE | Remove-Module -Force
 $MANIFEST = [System.IO.Path]::Combine('..', '..', '..', $MODULE, "$MODULE.psd1")
 Import-Module $MANIFEST -Force
+Import-Module -Name oh-my-posh
 #endregion
 
 InModuleScope $MODULE {
   Describe "Invoke-Profile function tests" -Tag Unit {
     It "Called function test" {
       Mock Clear-Host
+      Mock Test-Administrator
       Invoke-Profile
       Assert-MockCalled Clear-Host
     }
