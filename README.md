@@ -17,17 +17,28 @@ See my [blog post](https://tseknet.com/blog/psprofile) for more information.
 
 ## Installation
 
-Install TsekProfile from the PowerShell Gallery
+1. Install [dependencies](#included-modules):
 
-```powershell
-Install-Module -Name TsekProfile -Repository PSGallery -Scope CurrentUser
-```
+    ```powershell
+    Install-Module posh-git -Scope CurrentUser
+    Install-Module oh-my-posh -Scope CurrentUser
+    Install-Module Get-ChildItemColor -Scope CurrentUser -AllowClobber
+    Install-Module PSWriteHTML -Scope CurrentUser
+    ```
 
-Copy the TsekNet PowerShell profile to the appropriate location and execute
+2. Install [git](https://git-scm.com/download/win)
 
-```powershell
-Install-Profile
-```
+3. Install TsekProfile from the PowerShell Gallery:
+
+    ```powershell
+    Install-Module -Name TsekProfile -Scope CurrentUser
+    ```
+
+4. Copy the TsekNet PowerShell profile to the appropriate location and execute:
+
+    ```powershell
+    Install-Profile
+    ```
 
 ## Usage
 
