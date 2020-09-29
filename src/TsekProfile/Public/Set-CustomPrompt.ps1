@@ -116,7 +116,7 @@
       $prompt += Write-Prompt $timestamp -ForegroundColor $yellow -BackgroundColor $blue
 
       # Move the actual prompt to the next line and set the prompt
-      $prompt += "`n"
+      $prompt += Set-Newline
 
       $prompt += Write-Prompt -Object " $custom_symbol " -ForegroundColor $red -BackgroundColor $gray
       $prompt += Write-Prompt -Object "$forward_symbol " -ForegroundColor $gray

@@ -2,7 +2,7 @@
 Module Name: TsekProfile
 Module Guid: cb9cc768-774a-459b-b4d9-8380f406628c
 Download Help Link: NA
-Help Version: 0.2.0
+Help Version: 0.2.1
 Locale: en-US
 ---
 
