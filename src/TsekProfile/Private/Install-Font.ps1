@@ -18,7 +18,7 @@
   )
 
   try {
-    Get-Command git
+    $null = Get-Command git
   }
   catch {
     throw 'Failed to install fonts, Git not installed'

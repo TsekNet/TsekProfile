@@ -9,6 +9,7 @@
   InvokeBuild          = '5.6.1'
   PSScriptAnalyzer     = '1.19.1'
   platyPS              = '0.12.0'
+  'oh-my-posh'         = 'latest'
   'posh-git'           = 'latest'
   'Get-ChildItemColor' = 'latest'
   PSWriteHTML          = 'latest'

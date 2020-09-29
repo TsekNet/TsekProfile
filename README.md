@@ -13,18 +13,19 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Tsek
 TsekProfile is a PowerShell profile that adds built-in functionality to your
 PowerShell experience.
 
-See my [blog post](https://tseknet.com/blog/psprofile) about for more
-information.
+See my [blog post](https://tseknet.com/blog/psprofile) for more information.
 
 ## Installation
 
-This module will be published on the PowerShell Gallery. The steps will be as follows:
+Install TsekProfile from the PowerShell Gallery
 
 ```powershell
-# Install TsekProfile from the PowerShell Gallery
 Install-Module -Name TsekProfile -Repository PSGallery -Scope CurrentUser
+```
 
-# Copy the TsekNet PowerShell profile to the appropriate location and execute
+Copy the TsekNet PowerShell profile to the appropriate location and execute
+
+```powershell
 Install-Profile
 ```
 
@@ -49,6 +50,8 @@ The following (awesome) modules will be installed by default:
 
 1. [posh-git](https://github.com/dahlbyk/posh-git): Integrates Git and
    PowerShell by providing Git status summary information
+1. [oh-my-posh](https://github.com/JanDeDobbeleer): Exposes functions used to
+   write fancy PowerShell prompts
 1. [Get-ChildItemColor](https://github.com/joonro/Get-ChildItemColor): Provides
    colorization of outputs of `Get-ChildItem` Cmdlet of PowerShell
 1. [PSWriteHTML](https://github.com/EvotecIT/PSWriteHTML): Output PowerShell
@@ -58,6 +61,7 @@ Honorable mention: The [PowerLine](https://github.com/Jaykul/PowerLine) module,
 which sparked the idea for this module's development.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.

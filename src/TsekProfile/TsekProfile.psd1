@@ -12,7 +12,7 @@
   RootModule        = 'TsekProfile.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.1.0'
+  ModuleVersion     = '0.2.0'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -51,9 +51,11 @@
   # ProcessorArchitecture = ''
 
   # Modules that must be imported into the global environment prior to importing this module
+  # TODO: Remove Dependency on oh-my-posh
   RequiredModules   = @(
     'posh-git',
     'Get-ChildItemColor',
+    'oh-my-posh',
     'PSWriteHTML'
     )
 
@@ -119,7 +121,7 @@
         'custom',
         'git',
         'platyPS',
-        'powrshell',
+        'powershell',
         'profile',
         'pwsh'
         'title'
@@ -132,10 +134,17 @@
       RequireLicenseAcceptance = $false
 
       # A URL to the main website for this project.
-      ProjectUri               = 'https://tseknet.com'
+      ProjectUri               = 'https://github.com/TsekNet/TsekProfile'
 
       # A URL to an icon representing this module.
       IconUri                  = 'https://tseknet.com/assets/icons/icon-192x192.png'
+
+      ExternalModuleDependencies = @(
+        'posh-git',
+        'Get-ChildItemColor',
+        'oh-my-posh',
+        'PSWriteHTML'
+      )
 
       # ReleaseNotes of this module
       # ReleaseNotes = ''
