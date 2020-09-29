@@ -39,8 +39,15 @@ See my [blog post](https://tseknet.com/blog/psprofile) for more information.
 
 ## Usage
 
+The following functions are made available after installing this profile:
+
+```powershell
+Copy-LastCommand, Edit-Profile, Get-ExportedFunction, Get-FileHash256, Install-Profile, Invoke-Profile, Open-HistoryFile, Set-CustomPrompt
+```
+
 TsekProfile leverages [platyPS](https://github.com/PowerShell/platyPS) to
-automatically generate Markdown documentation. See [docs](/docs/TsekProfile.md) to get started.
+automatically generate Markdown documentation. See [docs](/docs/TsekProfile.md)
+for more information.
 
 ## Screenshots
 
