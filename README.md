@@ -31,7 +31,7 @@ See my [blog post](https://tseknet.com/blog/psprofile) for more information.
     Install-Module -Name TsekProfile -Scope CurrentUser
     ```
 
-4. Copy the TsekNet PowerShell profile to the appropriate location and execute:
+4. Set up TsekProfile:
 
     ```powershell
     Install-Profile
