@@ -25,43 +25,40 @@
   #>
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param (
-    [string]$Symbol = '2764', # Heart
+    [string]$Symbol = '1F680', # Heart
     [switch]$Force
   )
 
   begin {
     $black = [System.ConsoleColor]::Black
     $blue = [System.ConsoleColor]::Blue
-    $cyan = [System.ConsoleColor]::Cyan
     $dark_cyan = [System.ConsoleColor]::DarkCyan
     $gray = [System.ConsoleColor]::Gray
     $magenta = [System.ConsoleColor]::Magenta
     $red = [System.ConsoleColor]::Red
     $white = [System.ConsoleColor]::White
-    $yellow = [System.ConsoleColor]::Yellow
 
     $custom_symbol = [char]::ConvertFromUtf32("0x$Symbol")
+    $house_symbol = [char]::ConvertFromUtf32('0x1F3E0')
 
     $forward_arrow = [char]::ConvertFromUtf32(0xE0B1)
     $backward_symbol = [char]::ConvertFromUtf32(0xE0B2)
     $forward_symbol = [char]::ConvertFromUtf32(0xE0B0)
     $warning_symbol = [char]::ConvertFromUtf32(0x203C)
-    $start_symbol = ''
   }
 
   process {
     if ($Force -or $PSCmdlet.ShouldProcess('PowerShell prompt', 'overwrite')) {
-      $prompt = Write-Prompt -Object $start_symbol -ForegroundColor $white -BackgroundColor $black
-
       # Check the last command state and indicate if failed
-      if ($LastCommandFailed) {
+      if ($Global:Error.Count -gt $Global:err_count) {
+        $Global:err_count ++
         $prompt += Write-Prompt -Object $warning_symbol -ForegroundColor $white -BackgroundColor $red
-        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $red -BackgroundColor $cyan
+        $prompt += Write-Prompt -Object $forward_symbol -ForegroundColor $red -BackgroundColor $blue
       }
 
       # Add invocation number
-      $prompt += Write-Prompt -Object " $($MyInvocation.HistoryId) " -ForegroundColor $dark_gray -BackgroundColor $cyan
-      $prompt += Write-Prompt -Object $($forward_symbol) -ForegroundColor $cyan -BackgroundColor $gray
+      $prompt += Write-Prompt -Object " $($MyInvocation.HistoryId) " -ForegroundColor $dark_gray -BackgroundColor $blue
+      $prompt += Write-Prompt -Object $($forward_symbol) -ForegroundColor $blue -BackgroundColor $gray
 
       $full_path = $pwd.Path.Replace("$($pwd.Drive.Name)\", '').Replace('\', ' ' + $forward_arrow + ' ')
 
@@ -111,19 +108,24 @@
       # Writes the Invocation time and date
       $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 13)
       $prompt += Write-Prompt $backward_symbol -ForegroundColor $dark_cyan
-      $prompt += Write-Prompt $(Get-Elapsed) -ForegroundColor $yellow -BackgroundColor $dark_cyan
+      $prompt += Write-Prompt $(Get-Elapsed) -ForegroundColor $gray -BackgroundColor $dark_cyan
       $prompt += Write-Prompt $backward_symbol -ForegroundColor $blue -BackgroundColor $dark_cyan
-      $prompt += Write-Prompt $timestamp -ForegroundColor $yellow -BackgroundColor $blue
+      $prompt += Write-Prompt $timestamp -ForegroundColor $gray -BackgroundColor $blue
 
       # Move the actual prompt to the next line and set the prompt
       $prompt += Set-Newline
 
-      $prompt += Write-Prompt -Object " $custom_symbol " -ForegroundColor $red -BackgroundColor $gray
+      if ($pwd.Path -eq "$env:HOMEDRIVE\Tmp") {
+        $prompt += Write-Prompt -Object " $house_symbol " -ForegroundColor $red -BackgroundColor $gray
+      }
+      else {
+        $prompt += Write-Prompt -Object " $custom_symbol " -ForegroundColor $red -BackgroundColor $gray
+      }
       $prompt += Write-Prompt -Object "$forward_symbol " -ForegroundColor $gray
       $prompt += ' '
     }
   }
   end {
     return $prompt
-   }
+  }
 }

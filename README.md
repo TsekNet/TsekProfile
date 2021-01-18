@@ -49,7 +49,7 @@ for more information.
 
 ## Screenshots
 
-PowerShell running in an administrative window while working on a git repo
+Windows PowerShell running in an administrative window while working on a git repo
 
 ![PowerShell Admin](media/admingit.png)
 

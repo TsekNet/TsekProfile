@@ -38,6 +38,8 @@
 
     Write-Verbose '==Setting custom prompt=='
     # TODO: Investigate passing switch parameter dynamically to this function.
+    $Global:err_count = 0
+    Write-Verbose "Initializing with [$Global:err_count] errors"
     function global:prompt {
       Set-CustomPrompt -Force
     }

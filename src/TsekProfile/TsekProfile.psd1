@@ -12,7 +12,7 @@
   RootModule        = 'TsekProfile.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.2.1'
+  ModuleVersion     = '0.2.2'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -57,7 +57,7 @@
     'Get-ChildItemColor',
     'oh-my-posh',
     'PSWriteHTML'
-    )
+  )
 
   # Assemblies that must be loaded prior to importing this module
   # RequiredAssemblies = @()
@@ -111,7 +111,7 @@
     PSData = @{
 
       # Tags applied to this module. These help with module discovery in online galleries.
-      Tags                     = @(
+      Tags                       = @(
         'Catesta',
         'GitHub',
         'GitHub-Actions',
@@ -128,16 +128,16 @@
       )
 
       # A URL to the license for this module.
-      LicenseUri               = 'https://github.com/TsekNet/TsekProfile/blob/master/LICENSE'
+      LicenseUri                 = 'https://github.com/TsekNet/TsekProfile/blob/master/LICENSE'
 
       # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-      RequireLicenseAcceptance = $false
+      RequireLicenseAcceptance   = $false
 
       # A URL to the main website for this project.
-      ProjectUri               = 'https://github.com/TsekNet/TsekProfile'
+      ProjectUri                 = 'https://github.com/TsekNet/TsekProfile'
 
       # A URL to an icon representing this module.
-      IconUri                  = 'https://tseknet.com/assets/icons/icon-192x192.png'
+      IconUri                    = 'https://tseknet.com/assets/icons/icon-192x192.png'
 
       ExternalModuleDependencies = @(
         'posh-git',
