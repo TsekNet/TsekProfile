@@ -23,15 +23,13 @@ See my [blog post](https://tseknet.com/blog/psprofile) for more information.
     Install-Module posh-git, oh-my-posh, Get-ChildItemColor, PSWriteHTML -Scope CurrentUser -AllowClobber
     ```
 
-2. Install [git](https://git-scm.com/download/win) and reopen the PowerShell window
-
-3. Install TsekProfile from the PowerShell Gallery:
+2. Install TsekProfile from the PowerShell Gallery:
 
     ```powershell
     Install-Module -Name TsekProfile -Scope CurrentUser
     ```
 
-4. Set up TsekProfile:
+3. Set up TsekProfile:
 
     ```powershell
     Install-Profile

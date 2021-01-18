@@ -1,34 +1,53 @@
 ﻿function Install-Font {
   <#
   .SYNOPSIS
-    Download Powerline fonts from GitHub.
+    Download a font from a GitHub release.
   .DESCRIPTION
-    Powerline fonts are required for the custom characters that are used in the
-    custom prompt.
+    Without the requirement of Git installed:, this function can be leveraged to:
+      1. Download a font from a GitHub release to a temporary directory
+      2. Extract the font to a temporary directory
+      3. Install the font
+      4. Clean up the temporary directories
   .LINK
-    https://github.com/powerline/fonts/blob/master/samples/All.md
+    https://github.com/powerline/fonts/blob/master/install.ps1
+    https://gist.github.com/f3l3gy/0e89dde158dde024959e36e915abf6bd
   .PARAMETER FontName
-    Name of the font to install (ex: 'DejaVu Sans Mono for Powerline')
+    Name of the font to install (ex: 'CascadiaCodePL')
   .EXAMPLE
-    Install-Font -FontName 'DejaVu Sans Mono for Powerline'
+    Install-Font -FontName 'CascadiaCodePL'
   #>
   [CmdletBinding()]
   param (
-    [System.IO.FileInfo]$FontName = 'DejaVu Sans Mono for Powerline'
+    [System.IO.FileInfo]$FontName = 'CascadiaCodePL',
+    [string]$Repo = 'microsoft/cascadia-code'
   )
+  $font_file = "$env:windir\fonts\$FontName.ttf"
+  $release = "https://github.com/$Repo/releases/latest"
+
+  if (Test-Path $font_file) {
+    return
+  }
 
   try {
-    $null = Get-Command git
+    $tags = (Invoke-WebRequest -Uri $release -UseBasicParsing)
+    $release_path = ($tags.Links -match "/releases/download/").href
+    $uri = "https://github.com$release_path"
+    Invoke-WebRequest $uri -OutFile "$env:TEMP/cascadia-code.zip"
   }
   catch {
-    throw 'Failed to install fonts, Git not installed'
+    throw "Failed to download [$FontName] from [$download]: $_"
   }
 
-  $font_path = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts\"
-  $font_file = "$font_path\$FontName.ttf"
-  if (-not (Test-Path $font_file)) {
-    Write-Verbose "Installing Fonts to $font_path"
-    git clone https://github.com/PowerLine/fonts
-    Invoke-FontScript
+  try {
+    Expand-Archive "$env:TEMP/cascadia-code.zip"  -DestinationPath "$env:TEMP/cascadia-code-unzipped" -Force
   }
+  catch {
+    throw "Failed to unzip [$FontName]: $_"
+  }
+
+  Write-Verbose "Adding $FontName to Windows fonts"
+  $fonts = (New-Object -ComObject shell.application).NameSpace(0x14)
+  $fonts.CopyHere($font_file)
+
+  Remove-Item @("$env:TEMP/cascadia-code.zip", "$env:TEMP/cascadia-code-unzipped") -Recurse -Force -ErrorAction SilentlyContinue
 }

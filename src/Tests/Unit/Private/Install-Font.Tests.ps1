@@ -8,25 +8,28 @@ Import-Module $MANIFEST -Force
 
 InModuleScope $MODULE {
   Describe "Install-Font function tests" -Tag Unit {
-    It "Git command not found" {
-      Mock Get-Command { throw }
-      { Install-Font } | Should Throw
+    It "Early Return" {
+      Mock Test-Path { return $true }
+      { Install-Font } | Should -Not -Throw
     }
-    It "Font path not found" {
+    It "Invoke-WebRequest failed" {
       Mock Test-Path { return $false }
-      Mock Write-Verbose
-      { Install-Font } | Should Throw
-      Assert-MockCalled Write-Verbose 0
+      Mock Invoke-WebRequest { throw 'some error' }
+      { Install-Font } | Should -Throw 'Failed to download [CascadiaCodePL]'
     }
-    It "Font does not exist yet" {
-      Mock Get-Command
-      Mock Write-Verbose
-      Mock git
-      Mock Invoke-FontScript
-      Install-Font -Verbose
-      Assert-MockCalled Write-Verbose 1
-      Assert-MockCalled git 1
-      Assert-MockCalled Invoke-FontScript
+    It "Expand-Archive failed" {
+      Mock Test-Path { return $false }
+      Mock Expand-Archive { throw }
+      Mock Invoke-WebRequest
+      { Install-Font } | Should -Throw 'Failed to unzip [CascadiaCodePL]'
+    }
+    It "Assert function calls" {
+      Mock Test-Path { return $false }
+      Mock Invoke-WebRequest
+      Mock Expand-Archive
+      Install-Font
+      Assert-MockCalled Invoke-WebRequest 2
+      Assert-MockCalled Expand-Archive 1
     }
   }
 }
