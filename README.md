@@ -1,5 +1,7 @@
 # TsekProfile
 
+🚨 This repository is no longer maintained. See [github.com/tseknet/dotfiles](https://github.com/tseknet/dotfiles) for my latest PowerShell profile.
+
 [![Minimum Supported PowerShell
 Version](https://img.shields.io/badge/PowerShell-5.1+-purple.svg)](https://github.com/PowerShell/PowerShell)
 [![License:
